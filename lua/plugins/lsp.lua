@@ -7,13 +7,13 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 
 local function on_attach()
-   vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
+   vim.keymap.set("n", "F", vim.lsp.buf.hover, { buffer = 0 })
    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
    vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, { buffer = 0 })
    vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { buffer = 0 })
 end
 
-local languages = { "clangd", "tsserver", "html", "cssls", "pyright", "texlab" }
+local languages = { "clangd", "tsserver", "html", "cssls", "pyright", "texlab" ,'fortls', 'jdtls'}
 
 return {
    {
@@ -48,7 +48,7 @@ return {
 
          vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
             vim.lsp.diagnostic.on_publish_diagnostics, {
-               virtual_text = false
+               virtual_text = true
             }
          )
       end
@@ -59,10 +59,10 @@ return {
    },
    {
       "williamboman/mason-lspconfig.nvim",
-      opts = {
-         ensure_installed = { "lua_ls", "clangd", "tsserver", "html", "cssls",
-            "tailwindcss", "pyright", }
-      }
-   }
+      -- opts = {
+      --    ensure_installed = { "lua_ls", "clangd", "tsserver", "html", "cssls",
+      --       "tailwindcss", "pyright", 'fortls',}
+      -- },
+   },
 
 }

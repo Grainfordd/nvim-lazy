@@ -12,19 +12,29 @@ return {
 
 	{
 		'akinsho/bufferline.nvim',
-
-		config = function()
-
-			require('bufferline').setup{
-				options = {
-					hover = {
-						enabled = true,
-						delay = 200,
-						reveal = {'close'},
-					},
-					separator = 'slope',
-				}
+		opts = {
+			options = {
+				hover = {
+					enabled = true,
+					delay = 200,
+					reveal = {'close'},
+				},
+				separator = 'slope',
 			}
-		end
+		}
+
+		-- config = function()
+
+		-- 	require('bufferline').setup{
+		-- 		options = {
+		-- 			hover = {
+		-- 				enabled = true,
+		-- 				delay = 200,
+		-- 				reveal = {'close'},
+		-- 			},
+		-- 			separator = 'slope',
+		-- 		}
+		-- 	}
+		-- end
 	},
 }

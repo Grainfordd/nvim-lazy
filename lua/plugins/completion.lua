@@ -18,13 +18,23 @@ return {
          "hrsh7th/cmp-path",
          "hrsh7th/cmp-cmdline",
          "hrsh7th/cmp-buffer",
+		 "hrsh7th/cmp-nvim-lsp-signature-help",
          "L3MON4D3/LuaSnip",
          "saadparwaiz1/cmp_luasnip",
          "onsails/lspkind.nvim",
+		"rafamadriz/friendly-snippets",
       },
       config = function()
          local lspkind = require("lspkind")
          local cmp = require("cmp")
+		 local luasnip = require('luasnip')
+		 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+
+			luasnip.setup({
+				region_check_events = 'CursorHold,InsertLeave',
+				delete_check_events = 'TextChanged,InsertLeave'
+			})
+	
          cmp.setup({
             snippet = {
                expand = function(args)
@@ -37,16 +47,43 @@ return {
             },
             mapping = cmp.mapping.preset.insert({
                ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-               ["<C-f>"] = cmp.mapping.scroll_docs(4),
+               -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
+               ["<C-f>"] = cmp.mapping.abort(),
                ["<CR>"] = cmp.mapping.confirm({ select = true }),
-               ["<Tab>"] = cmp.mapping.select_next_item(),
-               ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+				['<C-e>'] = cmp.mapping.abort(),
+               -- ["<Tab>"] = cmp.mapping.select_next_item(),
+               -- ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+			   ['<Tab>'] = cmp.mapping(function (fallback)
+						if cmp.visible() then
+							cmp.select_next_item()
+						elseif luasnip.expand_or_jumpable then
+							luasnip.expand_or_jump()
+
+						-- elseif has_words_before() then
+						-- 	cmp.complete()
+						else
+							fallback()
+						end
+			   end, {'i', 's'}),
+
+				['<S-Tab>'] = cmp.mapping(function (fallback)
+						if cmp.visible() then
+							cmp.select_prev_item()
+
+						elseif luasnip.jumpable(-1) then
+							luasnip.jump(-1)
+						else
+							fallback()
+						end
+				end, {'i', 's'})
             }),
             sources = cmp.config.sources({
                { name = 'nvim_lsp' },
                { name = 'luasnip' },
                { name = 'nvim_lua' },
                { name = 'buffer' },
+			   { name = 'path' },
+			   { name = 'nvim_lsp_signature_help' },
             }),
             enabled = function()
                -- disable completion in comments
@@ -88,6 +125,11 @@ return {
             sources = cmp.config.sources({ { name = "path" } },
             { { name = "cmdline" } })
          })
+		
+		cmp.event:on(
+			'confirm_done',
+			cmp_autopairs.on_confirm_done()
+		)
       end
    },
 }

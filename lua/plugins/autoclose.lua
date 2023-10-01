@@ -1,10 +1,16 @@
 return {
 	{
-		'kylechui/nvim-surround'
+		'kylechui/nvim-surround',
+		event = 'VeryLazy',
+		config = function()
+			require('nvim-surround').setup({})
+
+		end
+		
 	},
 
 	{
-		'jiangmiao/auto-pairs'
+		'jiangmiao/auto-pairs',
 	},
 
 	{
@@ -13,5 +19,12 @@ return {
 
 	{
 		'tpope/vim-commentary'
+	},
+	{
+		 "windwp/nvim-autopairs",
+		event = 'InsertEnter',
+		opts = {}
 	}
+
 }
+

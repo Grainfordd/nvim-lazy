@@ -28,7 +28,13 @@ opt.mouse = 'a'
 vim.cmd([[autocmd TermOpen * setlocal nonumber norelativenumber]])
 vim.cmd([[autocmd TermOpen * startinsert]])
 
+vim.g.vimtex_quickfix_ignore_filters = {
+	'Overfull \\hbox',
+	'\\headheight is too small (12.0pt)',
+}
+
 --vim.notify = require('notify')
 --require("notify")("My super important message")
 
-vim.cmd.colorscheme = 'nightfox'
+-- vim.cmd.colorscheme = 'nightfox'
+-- vim.cmd.colorscheme = '256_noir'

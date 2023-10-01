@@ -25,6 +25,11 @@ return {
 		-- 	Hint = {color = require('tokyonight.colors').hint},
 		-- 	Misc = {color = require('tokyonight.colors').purple},
 		-- }
-	}
+	},
+	{
+	'andreasvc/vim-256noir',
+	'pgdouyon/vim-yin-yang'
+	},
 }
+
 
