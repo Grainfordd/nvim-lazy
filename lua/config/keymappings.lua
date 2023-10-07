@@ -35,5 +35,26 @@ map('n', 'K', '5k', noremapSilent)
 -- Latex
 map('n', '<Leader>,', ':VimtexCompile<CR>', noremapSilent)
 
--- Terminal
--- map('n', '<F5>', ':FloatermNew --autoclose=0 python %<cr>', noremapSilent)
+--Terminal
+map('t', '<Esc>', '<C-\\><C-N>', noremapSilent)
+
+
+
+-- LSP floattoggle
+vim.g.diagnostics_active = true
+vim.keymap.set('n', '<leader>tt', function()
+    -- If we find a floating window, close it.
+    local found_float = false
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+        if vim.api.nvim_win_get_config(win).relative ~= '' then
+            vim.api.nvim_win_close(win, true)
+            found_float = true
+        end
+    end
+
+    if found_float then
+        return
+    end
+
+    vim.diagnostic.open_float(nil, { focus = false, scope = 'cursor' })
+end, { desc = 'Toggle Diagnostics' })
