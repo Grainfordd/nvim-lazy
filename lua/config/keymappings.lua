@@ -27,7 +27,8 @@ map('n', '<Leader>nt', ':NvimTreeToggle<CR>', noremap)
 -- EasyMotion
 map('n', '<Leader>s', '<Plug>(easymotion-s2)', noremap)
 
-map('n', '<Leader>r', ':!g++ -Wall % && ./a.out<CR>', noremapSilent)
+-- C++
+map('n', '<Leader>r', ':!g++ -Wall % && a.exe<CR>', noremapSilent)
 
 map('n', 'J', '5j', noremapSilent)
 map('n', 'K', '5k', noremapSilent)
@@ -38,6 +39,14 @@ map('n', '<Leader>,', ':VimtexCompile<CR>', noremapSilent)
 --Terminal
 map('t', '<Esc>', '<C-\\><C-N>', noremapSilent)
 
+--Matlab
+map('n', '<Leader>m', ':terminal matlab -nodisplay -nosplash -nodesktop -r "run(\'%\');<CR>"', noremapSilent)
+
+-- Python
+map('n', '<Leader>p', ':terminal python %<CR>', noremapSilent)
+
+-- C
+--map('n', '<Leader>c', ':terminal python %<CR>', noremapSilent)
 
 
 -- LSP floattoggle

@@ -27,10 +27,13 @@ opt.mouse = 'a'
 
 vim.cmd([[autocmd TermOpen * setlocal nonumber norelativenumber]])
 vim.cmd([[autocmd TermOpen * startinsert]])
+-- vim.cmd([[set shell=powershell]])
 
 vim.g.vimtex_quickfix_ignore_filters = {
 	'Overfull \\hbox',
 	'\\headheight is too small (12.0pt)',
+	-- 'Not defining \\perthousand',
+	-- 'Not defining \\micro'
 }
 
 --vim.notify = require('notify')
